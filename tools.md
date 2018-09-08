@@ -79,6 +79,11 @@ The interface you see let's you specify the repository you want to start.
 > Tim's example link looks like this
 > https://mybinder.org/v2/gh/betatim/zurich-bikes/master?urlpath=%2Flab
 
+> If you want to you can add a badge to your README.md that you can click
+> to launch your Binder. After typing in the details of your repository on
+> mybinder.org you can get a snippet that does this. For me the snippet
+> looks like `[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/betatim/zurich-bikes/master?urlpath=%2Flab)`
+
 When you first visit that URL you will see a loading page. In the background
 several things are happening while you wait. Binder is:
 
@@ -154,7 +159,7 @@ dependencies:
 ```
 
 **Exercise:** create an `environment.yml` in your GitHub repository that installs
-pandas and matplotlib.
+pandas.
 
 A nice feature of conda is that you can easily create environments that are
 completely separate from each other. This is particularly useful if you have
@@ -307,15 +312,95 @@ See you back here in 30 minutes.
 
 We wanted to count bikes in Zurich. Let's get back to that.
 
+I prepared a simple script that will analyse the bike data for us. [Download it from this URL](https://github.com/betatim/reproducible-science-tools/blob/bda42ff8d179f44298fa63b5f1eec21afe9b5731/example/bikes.py).
+
+Where does the data for this script come from? It assumes you are using the [2015 data from the city of Zurich](https://data.stadt-zuerich.ch/dataset/verkehrszaehlungen-werte-fussgaenger-velo), downloaded it and named it `bikes.csv`. Not ideal. Let's improve on this.
+
+**Exercise:** Where would you store your research data? How about files that are very small? Medium? Large?
+
 
 ## Fetching and storing data
 
+Whenever possible you should automate the fetching of your data so that future
+readers do not have to go on a wild goose chase around the internet, your old
+computers and USB drives to find it.
+
+One way of doing this is shown in [the updated version of `bikes.py`](https://github.com/betatim/reproducible-science-tools/blob/10a16a5371a40d548da448f1753b0657935de509/example/bikes.py).
+
+This script has gained two new things:
+
+* ability to download the data for us on demand
+* download the data from different years
+
+We can now use the same script to make plots for 2015 and 2014. If you lose the
+data it will download it from the city of Zurich webpage again.
+
+**Exercise:** add the script to your "zurich-bikes" repository, launch it and
+see if you can produce plots for 2014 and 2015.
 
 
-## automated archiving of your code
-## using Jupyter notebooks as fancy scripts
+### What happens if ...
+
+... you prepare a nice blog post to announce the launch of mybinder.org that
+uses an example based on this bike data, test it all for days, then get on a
+train for a short trip just before things go live?
+
+The city of Zurich open data website changed hosting providers and in the
+process something with their SSL certificate broke. This meant our nice example
+of super easy to reproduce bike science suddenly did not work anymore.
+
+> The people running the open data site were super fast to fix the problem after
+> we contacted them! Thanks a lot!
+
+Take away: if you like your data you should have made a copy and stored it on
+a proper data archive.
+
+(You should have [this tune in your head](https://youtu.be/4m1EFMoRFvY?t=30s)
+every time you think about where your data is.)
+
+There are many data archives. Your university might have one. There might be
+one that many people in your field of research use. Find out.
+
+**Exercise:** find a data archive for your field of research. Add it to the
+hackmd mentioning what field/institution it belongs to.
+
+My favourite two archives are:
+
+* https://zenodo.org - hosted by CERN (one of my ex-employers), no questions asked
+  before you get to 50GB dataset sizes. Gives you a DOI for your data.
+* https://osf.io/ - much more than just a data archive. They allow very large
+  datasets. Easy to use. (Disclaimer: I've been paid by them to work on [osfclient](https://github.com/osfclient/osfclient)).
+
+**Exercise:** Deposit the 2015 bike dataset on Zenodo's sandbox: https://sandbox.zenodo.org/
+
+**Exercise:** Update your `bikes.py` to use the data you deposited on Zenodo
+instead of fetching it from the city of Zurich data portal.
+
+
+## Automated archiving of your code
+
+It might feel like GitHub is forever, but it is probably not going to be here
+anymore in ten years. Or twenty. Or maybe the structure of the links break. Or
+you update your code and make changes.
+
+The same rules about creating long lasting copies of your data apply to the
+code you used to analyse it.
+
+If you are using GitHub to host your repository it is very easy to get an
+archived copy of it on Zenodo. As a nice side benefit you get a DOI that you
+can give to people who want to cite your code.
+
+**Exercise:** Make sure your repository runs on mybinder.org. Does it create
+the plots you expect? Does it fetch the data from Zenodo?
+
+**Exercise:** Follow the [Making Your Code Citable](https://guides.github.com/activities/citable-code/) guide to create
+an archived copy of your code. Whenever they link to zenodo.org please make
+super sure you replace it with sandbox.zenodo.org.
+
+
+## Using Jupyter notebooks as fancy scripts
 
 Papermill!
 
 
-## automating your sanity checks
+## Automating your sanity checks
