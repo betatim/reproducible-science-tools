@@ -10,10 +10,11 @@ def get_velo_data(location, year=2015):
     URLS = {
         2015: BASE + "5c994056-eda6-48c5-8e61-28e96bcd04a3/download/2015verkehrszaehlungenwertefussgaengervelo.csv",
         2014: BASE + "bd2c9dd9-5b05-4303-a4c9-4a9f5b73e8f7/download/2014verkehrszaehlungenwertefussgaengervelo.csv",
+        2016: BASE + "ed354dde-c0f9-43b3-b05b-08c5f4c3f65a/download/2016_verkehrszaehlungen_werte_fussgaenger_velo.csv"
         }
 
     if year not in URLS:
-        raise ValueError("Year has to be one of 2014, 2015 "
+        raise ValueError("Year has to be one of 2014, 2015, 2016 "
                          "not %s." % year)
 
     fname = "bikes-%i.csv" % year
@@ -37,7 +38,7 @@ def get_velo_data(location, year=2015):
     return data
 
 
-mythenquai = get_velo_data('ECO09113499', year=2015)
+mythenquai = get_velo_data('ECO09113499', year=2016)
 # rename for easier plotting
 mythenquai.columns = ["North", "South", "Total"]
 
@@ -45,4 +46,4 @@ mythenquai.columns = ["North", "South", "Total"]
 weekly = mythenquai.resample('W').sum()
 weekly.plot()
 
-plt.savefig("weekly-2015.png")
+plt.savefig("weekly-2016.png")

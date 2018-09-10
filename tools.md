@@ -302,6 +302,26 @@ be anything from very easy to very hard. To install it follow the [get started g
 
 After you have installed Docker and made sure it works, [install repo2docker on your laptop](https://github.com/Build-a-binder/build-a-binder.github.io/blob/master/workshop/20-repo2docker.md).
 
+Short version of the install instructions:
+```
+pip install https://github.com/jupyter/repo2docker/archive/master.zip
+```
+then test it with:
+```
+repo2docker https://github.com/norvig/pytudes/
+```
+The first time you run this it will take quite a while.
+
+It will eventually print something like:
+```
+[C 12:22:33.482 NotebookApp]
+
+    Copy/paste this URL into your browser when you connect for the first time,
+    to login with a token:
+        http://0.0.0.0:57184/?token=80b9438886c25d3da7f519823284a4e2c63800669e76e605
+```
+If you open the link printed here in your browser you will see the familiar notebook interface.
+
 
 ## BREAK TIME
 
@@ -400,7 +420,27 @@ super sure you replace it with sandbox.zenodo.org.
 
 ## Using Jupyter notebooks as fancy scripts
 
-Papermill!
+The problem with a script is that it stores its outputs (figures, tables, ...)
+separately from the code. This makes it quite tricky to piece together what
+belongs where. You often have a directory where you have the log output of the
+script together with increasingly weirdly named PNGs or JPGs that are plots made
+at various points in the script.
+
+Demo the latest [`bikes.py`]() and modify it to fetch the data
+from 2016. This will fail. Does anyone know why?
+
+[Papermill](https://papermill.readthedocs.io/en/latest/) is a tool that lets you
+run notebooks as scripts.
+
+This means you can have your debugging plots, tables, graphs, animated figures,
+or data frame outputs right there in your notebook. And you can run it like a
+script.
+
+**Exercise:** Add the [bikes.ipynb]() notebook to your "zurich-bikes"
+repository. Also add `papermill` to your dependencies. Rebuild your binder.
+
+**Exercise:** Launch your Binder and open a terminal. You can execute your
+notebook as a script with `papermill bikes.ipynb bikes-2016.ipynb -p year 2016`
 
 
 ## Automating your sanity checks
