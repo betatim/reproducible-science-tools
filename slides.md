@@ -295,15 +295,6 @@ Supported configuration files:
 
 ---
 
-# Why is this so great?
-
-When you come back to a project a few months later there is only one command you
-need to remember.
-
-Octave (free Matlab clone): https://github.com/binder-examples/octave
-
----
-
 # Topics
 
 * GitHub and GitLab
@@ -313,56 +304,5 @@ Octave (free Matlab clone): https://github.com/binder-examples/octave
 * Data storage options and long term code storage
 * Notebooks as scripts, papermill
 * Keeping it all working
-
----
-
-# Mini research project
-
-I will use a made up project that analyses bike rides in Zurich.
-
-The goal is to reproduce this figure.
-
-.center.width-60[![](img/weekly.png)]
-
----
-
-# GitHub or GitLab
-
-A place to host your code, its history, project management, and collaboration.
-
-Just use it.
-
-**Exercise:** create an account on github.com
-
----
-
-# Create a new repository
-
-**Exercise:** create a new repository called "zurich-bikes"
-
-**Exercise:** create a file called `hello.py` via the web interface with `print("Hello world")` on the first line.
-
----
-
-# Run it!
-
-Head over to https://mybinder.org/
-
-The interface you see on mybinder.org let's you specify the repository you want
-to have started.
-
-**Exercise:**
-
-1. Type the URL of your repository into the "GitHub repo or URL" box (should be
-    something like https://github.com/YOURGITHUBNAME/zurich-bikes/)
-1. As you type the URL the webpage will generate a link you can share with
-   others in the "Copy the URL below..." box. It should look something like: https://mybinder.org/v2/gh/YOURGITHUBNAME/zurich-bikes/master
-1. Copy it, open a new tab and visit that URL
-
----
-
-# Add some analysis code
-
-
 
 ---
