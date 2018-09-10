@@ -1,0 +1,12 @@
+language: python
+python:
+- 3.6
+services:
+- docker
+sudo: required
+
+install:
+  - pip install https://github.com/jupyter/repo2docker/archive/master.zip
+  
+script:
+  - repo2docker . papermill bikes.ipynb bikes-2015.ipynb -p year 2015

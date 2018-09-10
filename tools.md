@@ -426,7 +426,7 @@ belongs where. You often have a directory where you have the log output of the
 script together with increasingly weirdly named PNGs or JPGs that are plots made
 at various points in the script.
 
-Demo the latest [`bikes.py`]() and modify it to fetch the data
+Demo the latest [`bikes.py`](https://github.com/betatim/reproducible-science-tools/blob/1045e0e09a522841b298e4047422ed99f482405c/example/bikes.py) and modify it to fetch the data
 from 2016. This will fail. Does anyone know why?
 
 [Papermill](https://papermill.readthedocs.io/en/latest/) is a tool that lets you
@@ -436,11 +436,63 @@ This means you can have your debugging plots, tables, graphs, animated figures,
 or data frame outputs right there in your notebook. And you can run it like a
 script.
 
-**Exercise:** Add the [bikes.ipynb]() notebook to your "zurich-bikes"
+**Exercise:** Add the [bikes.ipynb](https://github.com/betatim/reproducible-science-tools/blob/1045e0e09a522841b298e4047422ed99f482405c/example/bikes.ipynb) notebook to your "zurich-bikes"
 repository. Also add `papermill` to your dependencies. Rebuild your binder.
 
 **Exercise:** Launch your Binder and open a terminal. You can execute your
-notebook as a script with `papermill bikes.ipynb bikes-2016.ipynb -p year 2016`
+notebook as a script with `papermill bikes.ipynb bikes-2016.ipynb -p year 2016`.
+Can you track down the source of the error now?
 
 
 ## Automating your sanity checks
+
+One more thing. As a scientist your code writing workflow is probably something
+like this:
+
+* pick the next problem to solve
+* write some new code and modify existing code
+* run the code
+* do some sanity checks and experiments
+* run your code to solve the problem
+* go to step one
+
+There are two important things here:
+
+1. you perform sanity checks as you go along
+2. you modify existing code
+
+The danger of modifying code is that it might stop working for the original
+use case. How would you find out? You would probably wouldn't. And when you do
+find out that it is broken you need to re-run all your sanity checks to track
+down where the problem is.
+
+Wouldn't it be great if you could automate these sanity checks?
+
+This is what automated testing and continuous integration is all about.
+
+**Exercise:**
+1. visit https://travis-ci.org/profile/YOURGITHUBNAME
+1. activate travis for your "zurich-bike" repository
+1. go to your repository on GitHub and add a file called `.travis.yml` with the
+following content:
+```
+language: python
+python:
+- 3.6
+services:
+- docker
+sudo: required
+
+install:
+  - pip install https://github.com/jupyter/repo2docker/archive/master.zip
+
+script:
+  - repo2docker . papermill bikes.ipynb bikes-2015.ipynb -p year 2015
+```
+1. check the status of your travis run: https://travis-ci.org/YOURGITHUBNAME/zurich-bikes
+
+This will run your bikes notebook every time you change something. This is a good
+start to having a way to know all your old things still work. If you'd like to
+go further into the world of automated sanity checks (or "unit tests" as software
+engineers call it) I recommend https://katyhuff.github.io/python-testing/ as
+a starting point.
