@@ -489,6 +489,17 @@ install:
 script:
   - repo2docker . papermill bikes.ipynb bikes-2015.ipynb -p year 2015
 ```
+1. Edit your `environment.yml` file, used by repo2docker, and add `papermill` as an entry under `dependencies`. For example, your environment.yml may look like this:
+```
+name: reproducible-science-tools
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - pandas==0.23.4
+  - matplotlib==2.2.3
+  - papermill
+```
 1. check the status of your travis run: https://travis-ci.org/YOURGITHUBNAME/zurich-bikes
 
 This will run your bikes notebook every time you change something. This is a good
